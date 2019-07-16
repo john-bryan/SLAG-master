@@ -12,10 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUp"></activity>
-        <activity android:name=".ABU_ProperWasteDisposal" />
-        <activity android:name=".ContactUs" />
-        <activity android:name=".ABU_OurMission" />
+        <activity android:name=".BinStatus"></activity>
+        <activity android:name=".AdhocActivity" />
         <activity
             android:name=".MainActivity"
             android:hardwareAccelerated="false">

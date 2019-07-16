@@ -1,39 +1,46 @@
 package sg.edu.rp.c346.slag;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    //private WebView webView;
-    ImageView ivSlag;
-
-    ContextMenu itemHome;
-    ContextMenu itemAdhoc;
-    ContextMenu itemCheckBin;
+public class BinStatus extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_bin_status);
 
-        ivSlag = findViewById(R.id.imageView);
-        itemHome = findViewById(R.id.itemHome);
-        itemAdhoc = findViewById(R.id.itemAdhoc);
-        itemCheckBin = findViewById(R.id.itemBinStatus);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        int counter = 80;
+        Button btnSend = findViewById(R.id.btnSend);
+        progressBar.setMax(100);
+        progressBar.setProgress(counter);
 
-        //webView = (WebView) findViewById(R.id.webView);
-        //webView.setWebViewClient(new WebViewClient());
-        //webView.loadUrl("https://10.0.2.2:44379");
-        //webView.loadUrl("https://www.google.com/");
+            if (counter >= 80){
+                progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+            }
+
+
+
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(BinStatus.this, "Sending alert to personnel", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -58,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.itemBinStatus:
                 Intent iBinStat = new Intent(getApplicationContext(),BinStatus.class);
                 startActivity(iBinStat);
-                default:
-                    return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

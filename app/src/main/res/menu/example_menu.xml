@@ -6,45 +6,14 @@
         android:title="Home"
         app:showAsAction="never" />
 
-    <item android:id="@+id/itemAboutUs"
-        android:title="About Us"
+    <item android:id="@+id/itemBinStatus"
+        android:title="Check Bin Status"
         app:showAsAction="never">
-
-        <menu>
-            <item android:id="@+id/subItemAboutUs1"
-            android:title="Our Mission"/>
-
-            <item android:id="@+id/subItemAboutUs2"
-                android:title="Our Adhoc Services"/>
-
-            <item android:id="@+id/subItemAboutUs3"
-                android:title="Importance of Proper Disposal"/>
-
-        </menu>
-
     </item>
 
-    <item android:id="@+id/itemCollection"
-        android:title="Collection"
+    <item android:id="@+id/itemAdhoc"
+        android:title="Adhoc Form"
         app:showAsAction="never">
-
-        <menu>
-            <item android:id="@+id/subCollection1"
-                android:title="List of Collectable E-Waste"/>
-
-            <item android:id="@+id/subCollection2"
-                android:title="Locate our Bins"/>
-
-        </menu>
-
     </item>
-
-    <item android:id="@+id/itemContactUs"
-        android:title="Contact Us"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/itemSignUp"
-        android:title="Sign Up"
-        app:showAsAction="never" />
 
 </menu>
