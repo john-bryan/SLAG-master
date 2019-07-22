@@ -18,6 +18,7 @@ import java.util.List;
 
 public class AdhocActivity extends AppCompatActivity {
 
+    MyDBHandler mDataBaseHelper;
     TextView tvTotal;
     EditText etName;
     EditText etAdd;
@@ -33,6 +34,9 @@ public class AdhocActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adhoc);
+
+        MyDBHandler mydbHandler = new MyDBHandler(this);
+        mDataBaseHelper = new MyDBHandler(this);
 
         tvTotal = findViewById(R.id.tvTotal);
         etName = findViewById(R.id.etName);
@@ -59,12 +63,38 @@ public class AdhocActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AdhocActivity.this, "Submitted to database", Toast.LENGTH_LONG).show();
                 Intent iHome = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(iHome);
+
+                String name = etName.getText().toString();
+                String add = etAdd.getText().toString();
+                String items = etItems.getText().toString();
+
+                if(etName.length() != 0 && etAdd.length() != 0 && etItems.length() != 0) {
+                    AddData(name);
+                    AddData(add);
+                    AddData(items);
+                    Toast.makeText(AdhocActivity.this, "Submitted to database", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(AdhocActivity.this, "Please complete the form", Toast.LENGTH_LONG);
+                }
+
             }
         });
 
+
+    }
+
+    public void AddData(String newEntry){
+        boolean insertData = mDataBaseHelper.addHandler(newEntry);
+
+        if(insertData){
+            Toast.makeText(this, "Record added successfully", Toast.LENGTH_LONG);
+        }
+        else {
+            Toast.makeText(this, "Record Adding Failed", Toast.LENGTH_LONG);
+        }
 
     }
 
@@ -90,6 +120,9 @@ public class AdhocActivity extends AppCompatActivity {
             case R.id.itemBinStatus:
                 Intent iBinStat = new Intent(getApplicationContext(),BinStatus.class);
                 startActivity(iBinStat);
+            case R.id.itemAdhocList:
+                Intent iAdhocList = new Intent(getApplicationContext(),BinStatus.class);
+                startActivity(iAdhocList);
             default:
                 return super.onOptionsItemSelected(item);
         }

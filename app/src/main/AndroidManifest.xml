@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BinStatus"></activity>
+        <activity android:name=".AdHocList"></activity>
+        <activity android:name=".BinStatus" />
         <activity android:name=".AdhocActivity" />
         <activity
             android:name=".MainActivity"

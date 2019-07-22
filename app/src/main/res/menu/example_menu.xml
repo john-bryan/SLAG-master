@@ -16,4 +16,10 @@
         app:showAsAction="never">
     </item>
 
+    <item android:id="@+id/itemAdhocList"
+        android:title="View Adhoc History"
+        app:showAsAction="never">
+    </item>
+
+
 </menu>

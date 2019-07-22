@@ -1,39 +1,47 @@
 package sg.edu.rp.c346.slag;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
-    //private WebView webView;
-    ImageView ivSlag;
+import java.util.ArrayList;
+import java.util.jar.Attributes;
 
-    ContextMenu itemHome;
-    ContextMenu itemAdhoc;
-    ContextMenu itemCheckBin;
+public class AdHocList extends AppCompatActivity {
+
+    ListView lv;
+    MyDBHandler mDatabaseHelper;
+    ArrayList<AdHoc> alAdhoc;
+    CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ad_hoc_list);
 
-        ivSlag = findViewById(R.id.imageView);
-        itemHome = findViewById(R.id.itemHome);
-        itemAdhoc = findViewById(R.id.itemAdhoc);
-        itemCheckBin = findViewById(R.id.itemBinStatus);
+        lv = findViewById(R.id.lvList);
+        mDatabaseHelper = new MyDBHandler(this);
+        populateListView();
 
-        //webView = (WebView) findViewById(R.id.webView);
-        //webView.setWebViewClient(new WebViewClient());
-        //webView.loadUrl("https://10.0.2.2:44379");
-        //webView.loadUrl("https://www.google.com/");
+    }
+
+    private void populateListView() {
+        Cursor data = mDatabaseHelper.loadHandler();
+        alAdhoc = new ArrayList<AdHoc>();
+        while(data.moveToNext()){
+            alAdhoc.add(data.getString(1));
+            alAdhoc.add(data.getString(2));
+            alAdhoc.add(data.getString(3));
+        }
+
+        adapter = new CustomAdapter(this, R.layout.newlayout, alAdhoc);
+        lv.setAdapter(adapter);
+
     }
 
     @Override
@@ -65,4 +73,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
